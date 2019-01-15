@@ -34,6 +34,10 @@ def auto_login(driver , userName , passWord):
 
 ######################### Main Function #############################
 trytoch = 0
+os.chdir(os.path.dirname(__file__))
+path = os.getcwd()
+ope = open("user.txt" , "r")
+keep = ope.read().split('\n')
 while(1):
 	cmd = 'networksetup -getairportnetwork en0 | awk -F \':\' \'{print $2}\''
 	currentssid = os.popen(cmd).read()
@@ -49,8 +53,8 @@ while(1):
 		print "[-] Check Fail count : " + str(trytoch) + "."
 		if(trytoch >=3):
 			print "[+] Internet disconnect try to Login .@TRUEWIFI"
-			uName = "0917758128"
-			pWord = "290833"
+			uName = keep[0]
+			pWord = keep[1]
 			auto_login(createSession() , uName , pWord)
 			trytoch = 0
 	else:
